@@ -1,0 +1,16 @@
+<!-- Navbar -->
+<nav class="bg-white shadow-md py-4 sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center px-6">
+        <h1 class="text-2xl font-bold text-blue-600">Book Haven</h1>
+        <ul class="flex space-x-6 text-gray-700">
+            <li><a href="{% url "home" %}" class="hover:text-blue-500 transition">Home</a></li>
+            <li><a href="{% url "home" %}#books" class="hover:text-blue-500 transition">Books</a></li>
+            <li><a href="#contact" class="hover:text-blue-500 transition">About us</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url "logout" %}" class="hover:text-blue-500 transition">Logout</a></li>
+            {% else %}
+            <li><a href="{% url "login" %}" class="hover:text-blue-500 transition">Login</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

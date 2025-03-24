@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block section %}
+{% include "components/navbar.html" %}
+<div class="flex h-screen">
+    <!-- Add Book Form -->
+    <section id="add-Category" class="container mx-auto my-16 px-6">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Sign up</h2>
+        <div class="bg-white shadow-lg rounded-lg p-6 max-w-lg mx-auto">
+            <form method="post" class="space-y-4">
+                {% csrf_token %}
+                {{ form.as_p }}  
+                <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                    Sign up
+                </button>
+            </form>
+            <p>Create a new account <a href="{% url "register" %}" class='text-blue-500 mt-10'>New account?</a></p>
+        </div>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+<aside class="w-64 bg-blue-600 text-white p-6 space-y-6">
+    <h2 class="text-2xl font-bold">Admin Panel</h2>
+    <nav>
+        <ul class="space-y-4">
+            <li><a href="{% url "dashboard" %}" class="block hover:text-blue-300">Dashboard</a></li>
+            <li><a href="{% url "books" %}" class="block hover:text-blue-300">Manage Books</a></li>
+            <li><a href="{% url "users" %}" class="block hover:text-blue-300">Users</a></li>
+            <li><a href="{% url "author" %}" class="block hover:text-blue-300">Manage Author</a></li>
+            <li><a href="{% url "category" %}" class="block hover:text-blue-300">Manage Category</a></li>
+            <li><a href="{% url "logout" %}" class="block hover:text-blue-300">Logout</a></li>
+        </ul>
+    </nav>
+</aside>

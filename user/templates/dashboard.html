@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+{% block section %}
+<!-- Sidebar -->
+<div class="flex h-screen">
+        {% include "components\nav.html" %}
+        <!-- Main Content -->
+        <main class="flex-1 p-8">
+            <header class="bg-white shadow-md p-4 flex justify-between items-center">
+                <h2 class="text-xl font-semibold">Dashboard</h2>
+                <a href='{% url "logout" %}' class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Logout</a>
+            </header>
+
+            <!-- Dashboard Stats -->
+            <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 my-8">
+                <div class="bg-white p-6 shadow-md rounded-lg text-center">
+                    <h3 class="text-2xl font-bold text-blue-600">{{books|length}}</h3>
+                    <p class="text-gray-600">Total Books</p>
+                </div>
+                <div class="bg-white p-6 shadow-md rounded-lg text-center">
+                    <h3 class="text-2xl font-bold text-green-600">{{total_order|length}}</h3>
+                    <p class="text-gray-600">Orders Totals</p>
+                </div>
+                <div class="bg-white p-6 shadow-md rounded-lg text-center">
+                    <h3 class="text-2xl font-bold text-blue-600">{{users|length}}</h3>
+                    <p class="text-gray-600">Total User</p>
+                </div>
+                <div class="bg-white p-6 shadow-md rounded-lg text-center">
+                    <h3 class="text-2xl font-bold text-red-600">$1,200</h3>
+                    <p class="text-gray-600">Revenue</p>
+                </div>
+            </section>
+
+            <!-- Dashboard Stats -->
+            <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 my-8">
+                <a href='{% url "addbook" %}' class="bg-white p-6 shadow-md rounded-lg text-center">
+                    <h3 class="text-2xl font-bold text-blue-600 flex justify-center">
+                        <img src="{% static "assets/book.png" %}" class='w-14' alt="books">
+                    </h3>
+                    <p class="text-gray-600">Add Books</p>
+                </a>
+                <a href='{% url "author" %}' class="bg-white p-6 shadow-md rounded-lg text-center">
+                    <h3 class="text-2xl font-bold text-green-600 flex justify-center">
+                        <img src="{% static "assets/author.png" %}" class='w-14' alt="author">
+                    </h3>
+                    <p class="text-gray-600">Add Author</p>
+                </a>
+                <a href='{% url "category" %}' class="bg-white p-6 shadow-md rounded-lg text-center">
+                    <h3 class="text-2xl font-bold text-blue-600 flex justify-center">
+                        <img src="{% static "assets/category.png" %}" class='w-14' alt="category">
+                    </h3>
+                    <p class="text-gray-600">Add Category</p>
+                </a>
+            </section>
+
+            <!-- Manage Books Table -->
+            <section id="manage-books" class="bg-white p-6 shadow-md rounded-lg">
+                <div class="head flex justify-between">
+                    <h3 class="text-xl font-semibold mb-4">Manage Books</h3>
+                    <a href="{% url "addbook" %}" class="text-2xl">+</a>
+                </div>
+                <table class="w-full border-collapse border border-gray-200">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="border p-3">Title</th>
+                            <th class="border p-3">Author</th>
+                            <th class="border p-3">Category</th>
+                            <th class="border p-3">Price</th>
+                            <th class="border p-3">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if books %}
+                        {% for book in books %}
+                        <tr>
+                            <td class="border p-3">{{book.title}}</td>
+                            <td class="border p-3">{{ book.author }}</td> 
+                            <td class="border p-3">{{ book.category }}</td> 
+                            <td class="border p-3">₹ {{book.price}}</td>
+                            <td class="border p-3">
+                                <button class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Edit</button>
+                                <button class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <p>No Books available</p>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+{% endblock %}

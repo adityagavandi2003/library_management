@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block section %}
+<div class="flex h-screen">
+{% include "components/nav.html" %}
+<!-- Add Book Form -->
+<section id="add-Category" class="container mx-auto my-16 px-6">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Add a New Author</h2>
+    <div class="bg-white shadow-lg rounded-lg p-6 max-w-lg mx-auto">
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- This will render form fields with Tailwind styles -->
+            <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                Add Author
+            </button>
+        </form>
+    </div>
+    {% if author_list %}
+<!-- Manage Books Table -->
+<section id="manage-books" class="bg-white p-6 shadow-md rounded-lg w-full mt-10">
+    <div class="head flex justify-between">
+        <h3 class="text-xl font-semibold mb-4">Manage Author</h3>
+    </div>
+    <table class="w-full border-collapse border border-gray-200">
+        <thead>
+            <tr class="bg-gray-100">
+                <th class="border p-3">Name</th>
+                <th class="border p-3">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for author in author_list %}
+            <tr>
+                <td class="border p-3">{{author.name}}</td>
+                <td class="border p-3">
+                    <a href='{% url "updateauthor" author.id %}' class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Edit</a>
+                    <a href='{% url "deleteauthor" author.id %}' class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endif %}
+</section>
+</div>
+{% endblock %}

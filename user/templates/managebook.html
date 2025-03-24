@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block section %}
+<div class="flex h-screen">
+{% include "components/nav.html" %}
+<!-- Manage Books Table -->
+<section id="manage-books" class="bg-white p-6 shadow-md rounded-lg w-full">
+    <div class="btn">
+    {% include 'components/buttons.html' with btn='Add Book' url='new' %}
+    {% include 'components/buttons.html' with btn='Add Category' url='category' %}
+    {% include 'components/buttons.html' with btn='Add Author' url='author' %}
+    </div>
+    <div class="head flex justify-between">
+        <h3 class="text-xl font-semibold mb-4">Manage Books</h3>
+        <a href="{% url "addbook" %}" class="text-2xl">+</a>
+    </div>
+    {% if books %}
+    <table class="w-full border-collapse border border-gray-200">
+        <thead>
+            <tr class="bg-gray-100">
+                <th class="border p-3">Title</th>
+                <th class="border p-3">Author</th>
+                <th class="border p-3">Category</th>
+                <th class="border p-3">Price</th>
+                <th class="border p-3">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td class="border p-3">{{book.title}}</td>
+                <td class="border p-3">{{ book.author }}</td>
+                <td class="border p-3">{{ book.category }}</td>
+                <td class="border p-3">₹ {{book.price}}</td>
+                <td class="border p-3">
+                    <a href='{% url "update" book.id %}' class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Edit</a>
+                    <a href='{% url "delete" book.id %}' class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h3>No books are store</h3>
+    {% endif %}
+</section>
+</div>
+{% endblock %}
